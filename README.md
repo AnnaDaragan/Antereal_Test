@@ -1,2 +1,2 @@
 # Antereal_Test
-Test GIS
+Test GIS: desktop mapping application.
