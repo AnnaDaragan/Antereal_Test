@@ -13,22 +13,6 @@ class Figure:
         self.pen = QPen(QColor(*color_pen), 1)
         self.brush = QBrush(QColor(*color_brush), Qt.BrushStyle.SolidPattern)
 
-class Point(Figure):
-    def __init__(self, color):
-        Figure.__init__(self, color)
-
-class Line(Figure):
-    def __init__(self, color):
-        Figure.__init__(self, color)
-
-class Polygon(Figure):
-    def __init__(self, color_pen, color_brush):
-        Figure.__init__(self, color_pen, color_brush)
-
-class SelectedFigure(Figure):
-    def __init__(self, color_pen, color_brush):
-        Figure.__init__(self, color_pen, color_brush)
-
 class MapGraphicsView(QGraphicsView):
     def __init__(self):
         super(MapGraphicsView, self).__init__()
@@ -61,7 +45,7 @@ class MapGraphicsView(QGraphicsView):
     def mousePressEvent(self, event):
         if event.buttons() & Qt.MouseButton.LeftButton and self.move_element: 
             figure = self.itemAt(event.pos())
-            selected_color = SelectedFigure((255, 168, 18), (255, 168, 18, 50))
+            selected_color = Figure((255, 168, 18), (255, 168, 18, 50))
             figure.setPen(selected_color.pen)
 
             if type(figure) == QGraphicsPolygonItem:
@@ -176,11 +160,11 @@ class GisWindow(QMainWindow, Ui_GisWindow):
     def painting_map(self):
         for point in self.list_point:
             rect = QRectF(point, QSizeF(1, 1))
-            self.MapGraphicsView.scene.addEllipse(rect, Point((66, 133, 180)).pen)
+            self.MapGraphicsView.scene.addEllipse(rect, Figure((66, 133, 180)).pen)
         for line in self.list_line:
-            self.MapGraphicsView.scene.addLine(line,  Line((170, 102, 81)).pen)
+            self.MapGraphicsView.scene.addLine(line,  Figure((170, 102, 81)).pen)
         for polygon in self.list_polygon:
-            polygon_color = Polygon((85, 104, 50), (85, 104, 50, 50))
+            polygon_color = Figure((85, 104, 50), (85, 104, 50, 50))
             self.MapGraphicsView.scene.addPolygon(polygon, polygon_color.pen, polygon_color.brush)
 
     def get_coordinate_scene(self):
