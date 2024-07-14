@@ -1,9 +1,8 @@
-from PyQt6.QtWidgets import (QApplication, QMainWindow, QFileDialog, QGraphicsView, QLineEdit,
+from PyQt6.QtWidgets import (QApplication, QMainWindow, QFileDialog, QGraphicsView,
                              QGraphicsScene, QGraphicsEllipseItem, QGraphicsLineItem, QGraphicsPolygonItem)
 from PyQt6.QtGui import QPen, QColor, QPolygonF, QCursor, QKeySequence, QShortcut, QBrush
 from PyQt6.QtCore import Qt, QRectF, QPointF, QSizeF, QLineF, pyqtSlot
 
-import sys
 import os
 
 from ui_file.ui_gisWindow import Ui_GisWindow
@@ -209,7 +208,7 @@ class GisWindow(QMainWindow, Ui_GisWindow):
         self.MapGraphicsView.list_delete_figure.clear()
 
 if __name__ == "__main__":
-    app = QApplication(sys.argv)
+    app = QApplication([""])
     window = GisWindow()
     window.show()
     app.exec()
